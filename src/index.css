@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap');
+
+@import 'tailwindcss';
+
+@theme {
+  --font-main: 'Inter';
+  --font-secondary: 'Manrope';
+  --color-accent: #3e7fff;
+  --color-background: #0b132b;
+  --color-foreground: #deddff;
+  --color-secondary: #3a506b;
+}
+
+h1 {
+  @apply text-3xl font-semibold font-secondary tracking-tight;
+}
+h2 {
+  @apply text-xl font-medium font-main;
+}
+
+* {
+  @apply font-main text-foreground rounded-md;
+}
+
+body {
+  @apply bg-background;
+}
