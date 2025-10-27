@@ -6,7 +6,7 @@
 
 > Calculate your personalized daily water intake based on weight, height, age, gender, and activity level.
 
-![Water Calculator Screenshot](https://raw.githubusercontent.com/quarterwire/waterintake/refs/heads/main/public/webprint-v1.jpg)
+![Water Calculator Screenshot](https://github.com/quarterwire/waterintake/blob/main/public/webprint-v1.jpg)
 
 ## 🌟 Features
 
