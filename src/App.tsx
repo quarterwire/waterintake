@@ -152,7 +152,7 @@ function App() {
         </div>
 
         <button
-          className="bg-blue-600 p-4 tracking-wide text-white flex items-center justify-center gap-2 w-full hover:cursor-pointer hover:bg-blue-700 duration-200 transition-all rounded mt-4"
+          className="bg-accent p-4 tracking-wide text-white flex items-center justify-center gap-2 w-full hover:cursor-pointer hover:bg-accent/70 duration-200 transition-all rounded mt-4"
           onClick={handleCalculate}
         >
           Calculate Water Intake <FaBottleWater />
