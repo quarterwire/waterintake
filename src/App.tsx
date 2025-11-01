@@ -2,63 +2,12 @@ import { useState } from 'react'
 import { FaBottleWater } from 'react-icons/fa6'
 import { IoMdWarning } from 'react-icons/io'
 
-type Gender = 'male' | 'female'
-type ActivityLevel =
-  | 'sedentary'
-  | 'light'
-  | 'moderate'
-  | 'active'
-  | 'very_active'
-
-interface WaterIntakeParams {
-  weight: number
-  height: number
-  age: number
-  gender: Gender
-  activityLevel: ActivityLevel
-}
-
-interface WaterIntakeResult {
-  litersRecommended: number
-  litersBaseline: number
-  tdee: number
-}
-
-function calculateWaterIntake(params: WaterIntakeParams): WaterIntakeResult {
-  const { weight, height, age, gender, activityLevel } = params
-
-  // Calculate BMR using Mifflin-St Jeor Equation
-  let bmr: number
-  if (gender === 'male') {
-    bmr = 10 * weight + 6.25 * height - 5 * age + 5
-  } else {
-    bmr = 10 * weight + 6.25 * height - 5 * age - 161
-  }
-
-  // Activity multipliers
-  const activityMultipliers: Record<ActivityLevel, number> = {
-    sedentary: 1.2,
-    light: 1.375,
-    moderate: 1.55,
-    active: 1.725,
-    very_active: 1.9,
-  }
-
-  const tdee = Math.round(bmr * activityMultipliers[activityLevel])
-
-  // Base water intake: 30-35ml per kg of body weight
-  const litersBaseline = Math.round(weight * 0.033 * 10) / 10
-
-  // Add extra water based on activity (500ml per 1000 kcal above baseline)
-  const extraWater = Math.round(((tdee - bmr) / 1000) * 0.5 * 10) / 10
-  const litersRecommended = Math.round((litersBaseline + extraWater) * 10) / 10
-
-  return {
-    litersRecommended,
-    litersBaseline,
-    tdee,
-  }
-}
+import {
+  type ActivityLevel,
+  calculateWaterIntake,
+  type Gender,
+  type WaterIntakeResult,
+} from './utils/waterIntake'
 
 function App() {
   const [weight, setWeight] = useState<number>(0)
@@ -93,15 +42,15 @@ function App() {
   const isAgeInvalid = touched.age && age <= 0
 
   return (
-    <main className="container mx-auto max-w-4xl flex flex-col items-center justify-center min-h-screen gap-20 px-4 py-8">
+    <main className="container mx-auto max-w-4xl flex flex-col items-center justify-center h-screen gap-20 px-4">
       <span>
-        <img src="logo.png" className="flex items-center" alt="Logo" />
+        <img src="logo.png" className="flex items-center" />
       </span>
       <div className="flex flex-col items-center text-center gap-5 w-full max-w-2xl">
         <h2 className="text-xl">Enter your details</h2>
         {error !== '' && (
-          <p className="flex items-center gap-2 error">
-            <IoMdWarning size={24} className="error" />
+          <p className="flex items-center gap-2 text-red-500">
+            <IoMdWarning size={24} style={{ color: '#f87171' }} />
             {error}
           </p>
         )}
@@ -203,7 +152,7 @@ function App() {
         </div>
 
         <button
-          className="bg-accent p-4 tracking-wide text-white flex items-center justify-center gap-2 w-full hover:cursor-pointer hover:bg-accent/70 duration-200 transition-all rounded mt-4"
+          className="bg-blue-600 p-4 tracking-wide text-white flex items-center justify-center gap-2 w-full hover:cursor-pointer hover:bg-blue-700 duration-200 transition-all rounded mt-4"
           onClick={handleCalculate}
         >
           Calculate Water Intake <FaBottleWater />
