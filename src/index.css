@@ -25,3 +25,7 @@ h2 {
 body {
   @apply bg-background;
 }
+
+.error {
+  @apply text-red-400! border-red-400! fill-red-400!;
+}
